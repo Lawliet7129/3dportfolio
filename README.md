@@ -5,7 +5,7 @@ Welcome to my interactive personal portfolio! Built with React, Three.js, and Vi
 
 ## 🌐 Live Site
 
-> [Visit the live site](https://your-deployed-url.com)
+> [Visit the live site](https://baileykoo.com/)
 
 ---
 
@@ -52,7 +52,7 @@ src/
 
 1. Clone this repo:
    ```bash
-   git clone https://github.com/Lawliet7129/your-portfolio.git
+   git clone https://github.com/Lawliet7129/3dportfolio.git
    cd your-portfolio
    ```
 
@@ -91,4 +91,4 @@ Feel free to reach out or connect:
 
 - 📧 **Email**: [baileykoo@seas.upenn.edu](mailto:baileykoo@seas.upenn.edu)
 - 🧠 **GitHub**: [@Lawliet7129](https://github.com/Lawliet7129)
-- 🌐 **Site**: [your-deployed-url.com](https://your-deployed-url.com)
+- 🌐 **Site**: [your-deployed-url.com](https://baileykoo.com/)
