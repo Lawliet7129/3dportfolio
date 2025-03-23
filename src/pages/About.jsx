@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import Particles from "react-tsparticles";
@@ -20,6 +20,20 @@ const textContainerVariants = {
   },
 };
 
+
+
+const correctPassword = import.meta.env.VITE_RECRUITER_PASSWORD;
+
+const handlePasswordSubmit = () => {
+  if (passwordInput === correctPassword) {
+    localStorage.setItem("hasRecruiterAccess", "true"); 
+    setHasAccess(true);
+  } else {
+    alert("Incorrect password. Please try again.");
+  }
+};
+
+
 const itemVariants = {
   hidden: { opacity: 0, x: -30 },
   visible: { opacity: 1, x: 0 },
@@ -27,6 +41,26 @@ const itemVariants = {
 
 const About = () => {
   const [showConfetti, setShowConfetti] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [hasAccess, setHasAccess] = useState(false);
+
+  const correctPassword = import.meta.env.VITE_RECRUITER_PASSWORD;
+
+  const handlePasswordSubmit = () => {
+    if (passwordInput === correctPassword) {
+      sessionStorage.setItem("hasRecruiterAccess", "true"); // ← use sessionStorage
+      setHasAccess(true);
+    } else {
+      alert("Incorrect password. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    const storedAccess = sessionStorage.getItem("hasRecruiterAccess");
+    if (storedAccess === "true") {
+      setHasAccess(true);
+    }
+  }, []);
 
   const handleConfetti = () => {
     setShowConfetti(true);
@@ -150,10 +184,34 @@ const About = () => {
             innovative financial and engineering solutions.
           </motion.p>
 
+          <p className="mt-2 text-xs text-gray-600 text-center ">
+          Resume and experience sections are protected. Please enter the password for recruiter access.
+            </p>
+          
+                    {!hasAccess && (
+            <div className="mt-4 flex flex-col items-center justify-center gap-4">
+              <input
+                type="password"
+                placeholder="Enter recruiter password"
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+                className="px-4 py-2 rounded-md shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              />
+
+              <button
+                onClick={handlePasswordSubmit}
+                className="px-6 py-2 bg-[#fda085] hover:bg-[#f7945d] text-[#333] font-semibold rounded-full transition"
+              >
+                Unlock Resume + Experience
+              </button>
+            </div>
+          )}
+
+
           {/* TWO Download Resume Buttons */}
-          <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start mt-8">
-            <motion.a
-              href={resumeQuant}
+          {hasAccess && (
+  <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start mt-8">
+    <motion.a href={resumeQuant} 
               download
               className="px-6 py-3 rounded-full shadow-lg bg-[#fda085]
                          hover:bg-[#f7945d] transition-colors duration-300 
@@ -178,7 +236,7 @@ const About = () => {
             >
               Download SWE Resume
             </motion.a>
-          </div>
+          </div>)}
         </motion.div>
 
         {/* Profile Image Overlapping the Wave */}
@@ -341,7 +399,8 @@ const About = () => {
       {/* ------------------- */}
       {/* Experience Section */}
       {/* ------------------- */}
-      <section id="experience" className="py-16 bg-gray-50">
+      {hasAccess && (
+  <section id="experience" className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.h2
             className="text-3xl font-bold text-center mb-12 text-[#333]"
@@ -388,7 +447,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section>)}
     </>
   );
 };

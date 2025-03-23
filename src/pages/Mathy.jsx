@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Particles from "react-tsparticles";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -21,6 +21,8 @@ const DynamicBackground = () => {
     />
   );
 };
+
+
 
 
 const IntroSection = () => {
@@ -406,12 +408,55 @@ const BoardGamesSection = () => {
 
 
 const Mathy = () => {
+  const [hasAccess, setHasAccess] = useState(false);
+  useEffect(() => {
+    const storedAccess = sessionStorage.getItem("hasRecruiterAccess");
+    if (storedAccess === "true") {
+      setHasAccess(true);
+    }
+  }, []);
+  const [passwordInput, setPasswordInput] = useState("");
+  const handlePasswordSubmit = () => {
+    if (passwordInput === import.meta.env.VITE_RECRUITER_PASSWORD) {
+      sessionStorage.setItem("hasRecruiterAccess", "true");
+      setHasAccess(true);
+    } else {
+      alert("Incorrect password. Please try again.");
+    }
+  };
   return (
     <>
       <DynamicBackground />
       <HeroSection />
       <IntroSection /> 
-      <TimelineSection />
+      {!hasAccess ? (
+  <section className="py-20 bg-gray-100 text-center">
+    <h2 className="text-2xl font-bold text-gray-700 mb-4">
+      Awards & Experience (Recruiter Access Only)
+    </h2>
+    <p className="text-sm text-gray-600 mb-4">
+      Please enter the password to unlock this section.
+    </p>
+    <div className="flex flex-col items-center justify-center gap-4">
+      <input
+        type="password"
+        placeholder="Enter recruiter password"
+        value={passwordInput}
+        onChange={(e) => setPasswordInput(e.target.value)}
+        className="px-4 py-2 rounded-md shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-300"
+      />
+      <button
+        onClick={handlePasswordSubmit}
+        className="px-6 py-2 bg-[#fda085] hover:bg-[#f7945d] text-[#333] font-semibold rounded-full transition"
+      >
+        Unlock Section
+      </button>
+    </div>
+  </section>
+) : (
+  <TimelineSection />
+)}
+
       <CarouselSection />
       <BoardGamesSection />
 
