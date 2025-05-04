@@ -1,6 +1,9 @@
-import { sig, pennmed, penn, witg, palantir, meta, shopify, starbucks, tesla } from "../assets/images";
+import { karrot,sig, pennmed, penn, witg, palantir, meta, shopify, starbucks, tesla } from "../assets/images";
 import {
-    car, tdwebsite, mesh,
+     tdwebsite, mesh,
+    C2H5OHcraft1,
+    C2H5OHcraft2,
+    C2H5OHcraft3,
     contact,
     css,
     estate,
@@ -218,6 +221,17 @@ export const experiences = [
             "Selected from a competitive pool of undergraduates to participate in SIG’s fully paid, 2-day Sophomore Discovery program designed to introduce students to quantitative trading.",
         ],
     },
+    {
+        title: "Incoming Software Engineering Intern",
+        company_name: "Karrot (Danggeun Market)",
+        icon: karrot,
+        iconBg: "#f9c74f",
+        date: "June 2025 - August 2025",
+        points: [
+          "Incoming SWE intern on the Local Job Team at Karrot, a $2.7B SoftBank-backed startup and Korea’s largest hyperlocal app with 30M+ users across KR, JP, UK, and CA.",
+          "Joining the team responsible for developing Karrot’s local jobs platform, used by millions for neighborhood-based hiring and employment discovery.",
+        ],
+      }
 ];
 
 export const socialLinks = [
@@ -240,6 +254,21 @@ export const socialLinks = [
 
 export const projects = [
     {
+        name: "C2H5OH-craft (Mini Minecraft)",
+        description: "Developed in a team of three in a month, this Minecraft-style voxel engine was built using C++ and OpenGL with a custom scene graph architecture. I was responsible for implementing procedural terrain generation with multi-biome support, animated textures (water waves), procedurally placed assets, distance fog, and L-system–based sandstone rivers tailored to the C2H5OH-themed world. My work focused on creative biome design and terrain realism through temperature and moisture maps. The engine also supports hierarchical object transformations via a Qt-based GUI system.",
+        iconUrl: scene_graph,
+        previewImages: [
+            C2H5OHcraft1,
+            C2H5OHcraft2,
+            C2H5OHcraft3,
+          ],
+        videoUrl: "/videos/C2H5OHcraft.mp4",
+        repoUrl: "",
+        privateRepoNote: "Private repository — available upon request.",
+        theme: "game-dev, graphics",
+      },
+      
+    {
         name: "Scene Graph-Based (not so) Humanoid Puppet 🍾",
         description: "A scene graph-based system for hierarchical transformations and interactive manipulation of a humanoid puppet using Qt and OpenGL. The system is built upon a Node class hierarchy that facilitates structured transformations such as translation, rotation, and scaling.",
         iconUrl: scene_graph,
@@ -253,8 +282,8 @@ export const projects = [
         description: "A visually engaging 3D interactive portfolio showcasing my work in quantitative finance, software engineering, and computer graphics. The site features an intuitive, interactive environment where users can explore my projects in a dynamic, spatial setting.",
         iconUrl: tdwebsite,
         videoUrl: "/videos/3dwebsite.mp4", 
-        repoUrl: "",
-        privateRepoNote: "Private repository — available upon request.",
+        repoUrl: "https://github.com/Lawliet7129/3dportfolio",
+        privateRepoNote: "",
         theme: "fullstack",
       },
       {

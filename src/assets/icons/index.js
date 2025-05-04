@@ -44,6 +44,9 @@ import scene_graph from './scene_graph.png'
 import tdwebsite from './3dwebsite.png'
 import postprocessing from './prev_post_processing.png'
 import mesh from './mesh.png'
+import C2H5OHcraft1 from './C2H5OHcraft1.png'
+import C2H5OHcraft2 from './C2H5OHcraft2.png'   
+import C2H5OHcraft3 from './C2H5OHcraft3.png'
 
 
 
@@ -93,5 +96,8 @@ export {
     python,
     scene_graph,
     tdwebsite,
-    postprocessing
+    postprocessing,
+    C2H5OHcraft1,
+    C2H5OHcraft2,
+    C2H5OHcraft3,
 }

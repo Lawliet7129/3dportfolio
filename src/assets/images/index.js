@@ -9,6 +9,7 @@ import witg from './witg.png'
 import penn from './penn.png'
 import pennmed from './pennmed.png'
 import sig from './sig.png'
+import karrot from './karrot.png'
 
 export {
     hero,
@@ -21,5 +22,6 @@ export {
     witg,
     penn,
     pennmed,
-    sig
+    sig,
+    karrot
 }

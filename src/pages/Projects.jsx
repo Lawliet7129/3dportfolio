@@ -38,7 +38,6 @@ const Projects = () => {
         }}
       />
 
-      {/* Floating Hearts Particles */}
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -62,7 +61,6 @@ const Projects = () => {
         className="absolute inset-0 -z-10"
       />
 
-      {/* Title */}
       <motion.h1
         className="relative text-5xl md:text-6xl font-extrabold text-[#333] mt-10 mb-4"
         initial={{ opacity: 0, y: -30, scale: 0.95 }}
@@ -113,39 +111,59 @@ const Projects = () => {
                 visible: { opacity: 1, y: 0, rotateX: 0 },
               }}
               whileHover={{
-                scale: 1.1,
-                rotateX: 8,
-                rotateY: -8,
-                rotateZ: 2,
-                transition: { type: "spring", stiffness: 120, damping: 15 },
-              }}
+                scale: 1.05,
+                transition: { type: "spring", stiffness: 200, damping: 20 },
+              }}              
               whileTap={{ scale: 0.98 }}
               onClick={() => openModal(proj)}
             >
               {/* Hover Video */}
-              <motion.div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center"
-              >
-                <video
-                  src={proj.videoUrl}
-                  className="w-full h-full object-cover rounded-lg"
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  onMouseEnter={(e) => e.target.play()}
-                  onMouseLeave={(e) => {
-                    e.target.pause();
-                    e.target.currentTime = 0;
-                  }}
-                />
-              </motion.div>
+              {!proj.previewImages ? (
+  // Default hover video for all non-Minecraft projects
+  <motion.div
+    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center"
+  >
+    <video
+      src={proj.videoUrl}
+      className="w-full h-full object-cover rounded-lg"
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      onMouseEnter={(e) => e.target.play()}
+      onMouseLeave={(e) => {
+        e.target.pause();
+        e.target.currentTime = 0;
+      }}
+    />
+  </motion.div>
+) : null}
 
-              <motion.img
-                src={proj.iconUrl}
-                alt={proj.name}
-                className="w-48 h-48 object-contain mb-4 transition-opacity duration-500 ease-in-out group-hover:opacity-20"
-              />
+
+{proj.previewImages ? (
+  <div className="flex gap-2 mb-4 overflow-x-auto max-w-full z-10 relative">
+    {proj.previewImages.map((img, idx) => (
+      <img
+        key={idx}
+        src={img}
+        alt={`${proj.name} screenshot ${idx + 1}`}
+        className="w-40 h-40 object-cover rounded-md border border-white/30 shadow-md hover:scale-105 transition-transform cursor-pointer"
+        onClick={(e) => {
+          e.stopPropagation();
+          setSelectedProject(proj); // still open modal
+        }}
+      />
+    ))}
+  </div>
+) : (
+  <motion.img
+    src={proj.iconUrl}
+    alt={proj.name}
+    className="w-48 h-48 object-contain mb-4 transition-opacity duration-500 ease-in-out"
+  />
+)}
+
+
 
               {/* Hover Icon */}
               <motion.div

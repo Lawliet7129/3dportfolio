@@ -17,7 +17,7 @@ const modalVariants = {
 const ProjectModal = ({ project, onClose }) => {
   return (
     <motion.div
-      className="fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
       variants={backdropVariants}
       initial="hidden"
       animate="visible"
@@ -25,10 +25,10 @@ const ProjectModal = ({ project, onClose }) => {
       onClick={onClose}
     >
       <motion.div
-        className="relative bg-white/80 backdrop-blur-md rounded-xl shadow-2xl p-6 w-[90%] max-w-md border border-white"
-        variants={modalVariants}
-        transition={{ type: "spring", stiffness: 120, damping: 20 }}
-        onClick={(e) => e.stopPropagation()}
+      className="relative bg-white/80 backdrop-blur-md rounded-xl shadow-2xl w-[90%] max-w-2xl h-[90vh] overflow-y-auto p-6 border border-white"
+      variants={modalVariants}
+     transition={{ type: "spring", stiffness: 120, damping: 20 }}
+      onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
@@ -43,13 +43,31 @@ const ProjectModal = ({ project, onClose }) => {
         </h2>
 
         {/* Video */}
-        <div className="mb-4 w-full h-48 md:h-56 relative overflow-hidden rounded-lg">
-          <video
-            src={project.videoUrl}
-            controls
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        </div>
+        <div className="mb-6 w-full aspect-video max-h-[400px] md:max-h-[500px] rounded-lg overflow-hidden">
+  <video
+    src={project.videoUrl}
+    controls
+    className="w-full h-full object-contain rounded-lg"
+  />
+</div>
+
+
+        {/* Preview Images */}
+        {project.previewImages && (
+          <div className="flex gap-4 flex-wrap md:flex-nowrap overflow-x-auto mb-6">
+            {project.previewImages.map((img, idx) => (
+              <img
+                key={idx}
+                src={img}
+                alt={`${project.name} preview ${idx + 1}`}
+                className="w-64 h-64 object-contain rounded-lg border border-white/40 shadow-md hover:scale-105 transition-transform cursor-pointer"
+                onClick={() => window.open(img, "_blank")}
+              />
+            ))}
+          </div>
+        )}
+
+
 
         {/* Description */}
         <p className="text-gray-700 text-sm md:text-base mb-4">
